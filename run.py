@@ -8,8 +8,6 @@ from app.admin import admin
 
 from config import TOKEN
 
-from app.database.models import async_main
-
 
 async def main():
     bot = Bot(token=TOKEN,
@@ -24,7 +22,6 @@ async def main():
 
 
 async def startup(dispatcher: Dispatcher):
-    await async_main()
     print('Starting up...')
 
 
