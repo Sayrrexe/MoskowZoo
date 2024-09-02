@@ -10,3 +10,7 @@ menu = ReplyKeyboardMarkup(keyboard=[
 ],
                            resize_keyboard=True,
                            input_field_placeholder='Выберите пункт меню.')
+
+start_quiz = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='Начать Викторину!')]
+])

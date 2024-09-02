@@ -5,6 +5,7 @@ from aiogram.enums import ParseMode
 
 from app.user import user
 from app.admin import admin
+from app.quiz_module import quiz
 
 from config import TOKEN
 
@@ -14,7 +15,7 @@ async def main():
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     
     dp = Dispatcher()
-    dp.include_routers(user, admin)
+    dp.include_routers(user, admin, quiz)
     dp.startup.register(startup)
     dp.shutdown.register(shutdown)
     

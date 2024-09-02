@@ -1,6 +1,7 @@
 from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, InputFile
 from aiogram.filters import CommandStart, Command
+import os
 
 import app.keyboards as kb
 
@@ -21,4 +22,9 @@ async def text_prems(message: Message):
 async def text_prems(message: Message):
     await message.answer('Преимущества статуса опекуна:\n·Сертификат опеки, подтверждающий Ваш статус опекуна животного\n·Табличка на вольере с именем опекуна данного животного\n·Карта друга Московского зоопарка, дающая множество преимуществ', reply_markup=kb.menu) 
     
+@user.message(F.text =='Пройти Викторину')
+async def start_quiz(message: Message):
+    with open('Pictures/Totemidol.jpg', 'rb') as file:
+        photo = InputFile(file)  # Pass the file object directly
+        await message.answer_photo(photo=photo, caption='Your caption here', reply_markup=kb.start_quiz)
     
