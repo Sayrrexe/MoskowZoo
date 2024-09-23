@@ -1,8 +1,11 @@
+import os
+
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery, InputFile
 from aiogram.filters import CommandStart, Command
-import os
+from aiogram.fsm.context import FSMContext
 
+from app.states import Victory_State
 import app.keyboards as kb
 
 user = Router()
@@ -23,8 +26,8 @@ async def text_prems(message: Message):
     await message.answer('Преимущества статуса опекуна:\n·Сертификат опеки, подтверждающий Ваш статус опекуна животного\n·Табличка на вольере с именем опекуна данного животного\n·Карта друга Московского зоопарка, дающая множество преимуществ', reply_markup=kb.menu) 
     
 @user.message(F.text =='Пройти Викторину')
-async def start_quiz(message: Message):
-    with open('Pictures/Totemidol.jpg', 'rb') as file:
-        photo = InputFile(file)  # Pass the file object directly
-        await message.answer_photo(photo=photo, caption='Your caption here', reply_markup=kb.start_quiz)
+async def start_quiz(message: Message, state: FSMContext):
+        await message.answer('Так быстро? Ладно!\n Вам нужно будет отвечать на вопросы при помощи встроенной клавиатуры ( вы можете найти её справа в строке ввода)\nПерейдите туда и начинайте', reply_markup=kb.start_quiz_button)
+        await state.set_state(Victory_State.start)
+        
     

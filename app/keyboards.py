@@ -14,3 +14,12 @@ menu = ReplyKeyboardMarkup(keyboard=[
 start_quiz = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text='Начать Викторину!')]
 ])
+
+start_quiz_button = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='Начать!')]
+])
+
+answers_keyboard = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text='А'), KeyboardButton(text='Б')],
+    [KeyboardButton(text='В'), KeyboardButton(text='Г')]
+])
