@@ -1,30 +1,23 @@
 async def answer_render(data):
-    a,b,v,g = 0,0,0,0
+    a, b, v, g = 0, 0, 0, 0
     for i in data:
         if data[i] == 'А':
             a += 1
-        if data[i] == 'Б':
+        elif data[i] == 'Б':
             b += 1
-        if data[i] == 'В':
+        elif data[i] == 'В':
             v += 1
-        if data[i] == 'Г':
+        elif data[i] == 'Г':
             g += 1
+            
     variables = {'a': a, 'b': b, 'v': v, 'g': g}
     max_key = max(variables, key=variables.get)
-    if max_key == a:
+    
+    if max_key == 'a':
         return 'Ваше тотемное животное — Южноафриканский жираф. Вы спокойны, уравновешены и цените гармонию в жизни.'
-    if max_key == b:
+    elif max_key == 'b':
         return 'Ваше тотемное животное — Пума. Вы энергичны, любите приключения и стремитесь к новым вызовам.'
-    if  max_key == v:
+    elif max_key == 'v':
         return 'Ваше тотемное животное — Снежный барс. Вы открыты, дружелюбны и цените активное взаимодействие с окружающими.'
-    if max_key == g:
+    elif max_key == 'g':
         return 'Ваше тотемное животное — Медоед. Вы независимы, целеустремленны и стремитесь к самосовершенствованию.'
-  
-  
-
-	
-     
-        
-    
-    
-    

@@ -90,4 +90,8 @@ async def question1(message: Message, state: FSMContext):
 @user.message(Victory_State.question_10)
 async def question1(message: Message, state: FSMContext):
     await state.update_data(question_10 = message.text)
-    Message = answer_render(data=state.get_data())
+    await message.answer('Анализ Данных...')
+    data = await state.get_data()
+    Message = await answer_render(data)
+    await message.delete()
+    await message.answer(Message)
