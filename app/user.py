@@ -21,6 +21,11 @@ async def cmd_start(message: Message):
     await message.answer(welcome_text)
     await message.answer(description_text, reply_markup=kb.menu)
 
+@user.message(Command('menu'))
+async def cmd_menu(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer('Вы в меню!', reply_markup=kb.menu)
+
 @user.message(F.text.lower() =='что такое опекунство?')
 async def text_prems(message: Message):
     await message.answer(info_text, reply_markup=kb.menu)
@@ -34,6 +39,12 @@ async def start_user(message: Message, state: FSMContext):
         await message.answer(quiz_start_text, reply_markup=kb.start_quiz_button)
         await state.set_state(Victory_State.start)
 
+
+@user.callback_query(F.data == 'menu')
+async def start_user(callback: CallbackQuery, state: FSMContext):
+    await callback.message.answer(quiz_start_text, reply_markup=kb.start_quiz_button)
+    await state.set_state(Victory_State.start)
+
 async def check_answer(message):
     text = str(message.text)
     if text == 'А' or text ==  'Б' or text == 'В' or text == 'Г':
@@ -41,8 +52,6 @@ async def check_answer(message):
     else:
         await message.answer('Используйте встроенную клавиатуру!')
         return False
-
-
 
 @user.message(Victory_State.start)
 async def question1(message: Message, state: FSMContext):
@@ -145,6 +154,7 @@ async def question1(message: Message, state: FSMContext):
         image, text = answer_d[0], answer_d[1]
         await message.answer_photo(photo=FSInputFile(image, filename="medoed"),
                                    caption=text, reply_markup= await kb.share_kb(key))
+    await state.clear()
 
 @user.callback_query(F.data.startswith("share_"))
 async def share(callback: CallbackQuery):
