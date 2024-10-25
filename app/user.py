@@ -6,6 +6,7 @@ from aiogram.fsm.context import FSMContext
 from app.quiz_module import answer_render
 from app.states import Victory_State
 import app.keyboards as kb
+from config import question1_text, question2_text
 
 user = Router()
 
@@ -30,13 +31,13 @@ async def start_user(message: Message, state: FSMContext):
         
 @user.message(Victory_State.start)
 async def question1(message: Message, state: FSMContext):
-    await message.answer('Не будем тянуть!\nКак вы предпочитаете проводить время на природе?\n\nВарианты Ответов:\nA) Наблюдаю за окружающим миром и наслаждаюсь спокойствием.\nБ) Исследую новые места и занимаюсь активными видами спорта.\nВ) Участвую в приключениях и люблю быть в движении.\nГ) Остаюсь в тени, наблюдая за тем, что происходит вокруг.\n !Напоминаю, что отвечать нужно при помощи встроенной клавиатуры!', reply_markup=kb.answers_keyboard)
+    await message.answer(question1_text, reply_markup=kb.answers_keyboard)
     await state.set_state(Victory_State.question_1)
 
 @user.message(Victory_State.question_1)
 async def question1(message: Message, state: FSMContext):
     await state.update_data(question_1 = message.text)
-    await message.answer('2 из 10\nКак вы реагируете на изменения в своей жизни?\nA) Принимаю их спокойно и адаптируюсь.\nB) С радостью принимаю новые вызовы.\nC) Быстро нахожу способы справиться с ситуацией.\nD) Анализирую изменения и ищу наилучший подход.', reply_markup=kb.answers_keyboard)
+    await message.answer(question2_text, reply_markup=kb.answers_keyboard)
     await state.set_state(Victory_State.question_2)
 
 @user.message(Victory_State.question_2)
